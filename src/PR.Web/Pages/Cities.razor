@@ -1,0 +1,74 @@
+@page "/cities"
+
+<PageTitle>Orase</PageTitle>
+
+<style>
+    .index-page {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .index-page__button {
+        outline: none;
+        border: none;
+        background-color: #5c636a;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .index-page__button:hover {
+        background-color: #4f5050;
+    }
+    
+    .index-page__header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .index-page__content {
+    
+    }
+    
+    .table td {
+        vertical-align: baseline;
+    }
+
+</style>
+
+<div class="index-page">
+    
+    <div class="index-page__content">
+        @if (CityList == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Denumire</th>
+                    <th>Numar locuitor</th>
+                    <th>Tara</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var city in CityList)
+                {
+                    <tr>
+                        <td>@city.Description</td>
+                        <td>@city.NrOfPeople</td>
+                        <td>@city.Country</td>
+                        <td>
+                            <button class="index-page__button" type="button" @onclick="async () => await DeleteCity(city.Id)">Delete</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }  
+    </div>
+</div>
